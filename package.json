@@ -1,0 +1,19 @@
+{
+  "name": "create-feather-ui",
+  "version": "1.0.0",
+  "bin": {
+    "create-feather-ui": "bin/index.js"
+  },
+  "dependencies": {},
+  "keywords": [
+    "featherui",
+    "npx",
+    "cli",
+    "vite",
+    "react",
+    "tailwind"
+  ],
+  "files": [
+    "bin"
+  ]
+}
