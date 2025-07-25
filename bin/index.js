@@ -22,7 +22,7 @@ const appPath = path.join(process.cwd(), appName);
 // Install Tailwind and your library
 console.log("📦 Installing dependencies...");
 execSync(
-  `cd ${appName} && npm install -D tailwindcss@3.4.1 postcss autoprefixer && npx tailwindcss init -p`,
+  `cd ${appName} && npm install -D tailwindcss@3 postcss autoprefixer && npx tailwindcss init -p`,
   { stdio: "inherit" }
 );
 execSync(`cd ${appName} && npm install @mananjain31/feather-ui`, {
@@ -30,22 +30,27 @@ execSync(`cd ${appName} && npm install @mananjain31/feather-ui`, {
 });
 
 // Replace config and CSS
-const tailwindCSS = `@tailwind base;
-@tailwind components;
-@tailwind utilities;`;
+const tailwindCSS =
+  `@import "@mananjain31/feather-ui/styles.css";
+  ` + fs.readFileSync(`${appPath}/src/index.css`, "utf-8");
 
 fs.writeFileSync(`${appPath}/src/index.css`, tailwindCSS);
 
 const tailwindConfig = `
-module.exports = {
+const featherPreset = require("@mananjain31/feather-ui/tailwind.preset");
+
+export default {
+  presets: [featherPreset],
   content: [
-    "./index.html", 
     "./src/**/*.{js,ts,jsx,tsx}",
-     "./node_modules/@mananjain31/feather-ui/dist/**/*.{js,ts,jsx,tsx}"
+    "./node_modules/@mananjain31/feather-ui/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {},
+  },
   plugins: [],
-}
+};
+
 `;
 fs.writeFileSync(`${appPath}/tailwind.config.js`, tailwindConfig);
 
