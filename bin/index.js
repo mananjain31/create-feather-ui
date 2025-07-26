@@ -30,9 +30,7 @@ execSync(`cd ${appName} && npm install @mananjain31/feather-ui`, {
 });
 
 // Replace config and CSS
-const tailwindCSS =
-  `@import "@mananjain31/feather-ui/styles.css";
-  ` + fs.readFileSync(`${appPath}/src/index.css`, "utf-8");
+const tailwindCSS = `@import "@mananjain31/feather-ui/styles.css"`;
 
 fs.writeFileSync(`${appPath}/src/index.css`, tailwindCSS);
 
@@ -60,9 +58,11 @@ import { Button } from "@mananjain31/feather-ui";
 
 function App() {
   return (
-    <div className="p-8">
-      <Button variant="primary">Hello from FeatherUI!</Button>
-    </div>
+    <>
+      <div className="flex gap-2 mx-6 my-4">
+        <Button>Hello from FeatherUI!</Button>
+      </div>
+    </>
   );
 }
 
